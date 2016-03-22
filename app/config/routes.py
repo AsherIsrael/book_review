@@ -19,8 +19,16 @@ from system.core.router import routes
 routes['default_controller'] = 'Users'
 routes['POST']['/register'] = 'Users#registration'
 routes['POST']['/login'] = 'Users#login'
+routes['GET']['/users/<id>'] = 'Users#user_page'
+routes['GET']['/logout'] = 'Users#logout'
 
 routes['GET']['/books'] = 'Books#index'
+routes['GET']['/add'] = 'Books#add'
+routes['POST']['/add_new_book'] = 'Books#new'
+routes['GET']['/books/<id>'] = 'Books#books'
+routes['POST']['/new_review'] = 'Books#new_review'
+routes['POST']['/post_review'] = 'Books#post_review'
+routes['GET']['/delete/review/<id>'] = 'Books#delete_review'
 """
     You can add routes and specify their handlers as follows:
 

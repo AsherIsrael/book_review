@@ -1,0 +1,27 @@
+<!DOCTYPE html>
+<html lang="en">
+	<head>
+		<title>User Page</title>
+		<meta charset="utf-8">
+		<link rel="stylesheet" type="text/css" href="/static/book_review/css/style.css">
+	</head>
+	<body>
+		<div class="wrapper">
+			<div class="headbar">
+				<a href="/books">Home</a>
+				<a href="/add">Add New Review</a>
+				<a href="/logout">Logout</a>
+			</div>
+			<div class="user_info">
+				<p>User Alias: {{user['alias']}}</p>
+				<p>Name: {{user['name']}}</p>
+				<p>Email: {{user['email']}}</p>
+				<p>Total Reviews: {{user['review_count']}}</p><br><br>
+				<p>Posted Reviews on the following books:</p>
+				{% for review in reviews %}
+					<a href="/books/{{review['id']}}">{{review['title']}}</a><br>
+				{% endfor %}
+			</div>
+		</div>
+	</body>
+</html>

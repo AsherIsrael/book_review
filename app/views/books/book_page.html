@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html lang="en">
+	<head>
+		<title>Book Page</title>
+		<meta charset="utf-8">
+		<link rel="stylesheet" type="text/css" href="/static/book_review/css/style.css">
+	</head>
+	<body>
+		<div class="wrapper">
+			<div class="headbar">
+				<a href="/books">Home</a>
+				<a href="/logout">Logout</a>
+			</div>
+			<h1>{{book['title']}}</h1>
+			<h2>Author: {{book['author_name']}}</h2>
+			<div class="reviews">
+				<h1>Reviews:</h1>
+				{% for review in reviews %}
+					<hr>
+					<p>Rating: {{review['rating']}}</p>
+					<p><a href="/users/{{review['user_id']}}">{{review['alias']}}</a> says: {{review['content']}}</p>
+					<p>Posted: {{review['created_at']}}</p>
+					{% if review['user_id'] == session['id'] %}
+						<a href="/delete/review/{{review['id']}}">Delete this review</a>
+					{% endif %}
+				{% endfor %}
+			</div>
+			<div class="review_box">
+				{% with messages = get_flashed_messages() %}
+					{% if messages %}
+						{% for message in messages %}
+							<p>{{message}}</p>
+						{% endfor %}
+					{% endif %}
+				{% endwith %}
+				<form action="/new_review" method="POST">
+					<input type="hidden" value="{{book['id']}}" name="book_id">
+					Add a Review: <textarea name="review"></textarea>
+					Rating: <input type="number" min="1" max="5" value="1" name="rating">Stars
+					<button type="submit">Submit Review</button>
+				</form>
+			</div>
+		</div>
+	</body>
+</html>

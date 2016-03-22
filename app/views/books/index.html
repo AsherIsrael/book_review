@@ -1,13 +1,34 @@
 <!DOCTYPE html>
 <html lang="en">
 	<head>
-		<title>Welcome</title>
+		<title>Books Home</title>
 		<meta charset="utf-8">
 		<link rel="stylesheet" type="text/css" href="/static/book_review/css/style.css">
 	</head>
 	<body>
 		<div class="wrapper">
+			<div class="headbar">
 			<h1>Welcome, {{session['alias']}}!</h1>
+				<a href="/add">Add New Review</a>
+				<a href="/logout">Logout</a>
+			</div>
+			<div class="recent_reviews">
+				<h2>Recent Book Reviews:</h2>
+				{% for review in recent_reviews %}
+					<a href="/books/{{review['book_id']}}">{{review['title']}}</a><br>
+					<p>Rating: {{review['rating']}}</p>
+					<p><a href="/users/{{review['user_id']}}">{{review['alias']}}</a>says: {{review['content']}}</p>
+					<p>Posted at: {{review['created_at']}}</p>
+				{% endfor %}
+			</div>
+			<div>
+				<h1>Other Books with Reviews:</h1>
+				<div class="book_list"
+					{% for book in books %}
+						<a href="/books/{{book['id']}}">{{book['title']}}</a><br>
+					{% endfor %}
+				</div>
+			</div>
 		</div>
 	</body>
 </html>

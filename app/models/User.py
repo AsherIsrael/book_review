@@ -18,7 +18,7 @@ class User(Model):
 
 		if len(name) < 1:
 			errors.append("name cannot be blank")
-		elif not name.isalpha():
+		elif not name.replace(" ","").isalpha():
 			errors.append("name can only contain letters")
 
 		if len(alias) < 1:
@@ -70,3 +70,8 @@ class User(Model):
 		print "User get_user_by_email"
 		get_user_query = "SELECT id, alias, pass_hash FROM users WHERE email = %s LIMIT 1"
 		return self.db.query_db(get_user_query, [email])
+
+	def get_user_by_id(self, id):
+		print "User get_user_by_email"
+		get_user_query = "SELECT email, name, alias, pass_hash, (SELECT COUNT(reviews.user_id) FROM reviews WHERE reviews.user_id = %s) as review_count FROM users WHERE id = %s"
+		return self.db.query_db(get_user_query, [id, id])

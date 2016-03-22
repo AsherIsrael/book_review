@@ -1,0 +1,20 @@
+.headbar{
+	width: 100%;
+}
+
+	.headbar *{
+		display: inline-block;
+	}
+
+.register_login{
+	display: inline-block;
+	width: 50%;
+}
+
+.book_list{
+	display: inline-block;
+	overflow-y: scroll;
+	width: 20%;
+	height: 10em;
+	outline: 2px solid black;
+}
